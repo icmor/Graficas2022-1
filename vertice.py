@@ -1,30 +1,26 @@
-#clase que modela un vertice
-class vertice:
+class Vertice:
 
-    #Metodo constructor de vertices
-    def __init__(self, identificador, vecinos =[]):
+    # Método constructor
+    def __init__(self, identificador, vecinos = None):
         self.identificador = identificador
-        self.vecinos = vecinos
+        if not vecinos:
+            self.vecinos = []
+        else:
+            self.vecinos = vecinos
 
-    #Metodo que nos devuelva el grado de un vertice
-    def get_grado(self):
+    # Devuelve el grado de un vértice y se obtiene como cualquier otro atributo
+    @property
+    def grado(self):
         return len(self.vecinos)
 
-    #Metodo que nos devuelve los vecinos de un vertice
-    def get_vecinos(self):
-        return self.vecinos
+    # Método que nos dice si dos vértices son iguales
+    def __eq__(self, other):
+       return self.identificador == other.identificador
 
-    #Metodo que nos devuelve el identificador de un vertice
-    def get_id(self):
-        return self.identificador
+    # Método que nos devuelve una representacion en cadena de un vértice al evaluar
+    def __repr__(self):
+        return f"Vertice('{self.identificador}')"
 
-    #Metodo que nos dice si dos vertices son iguales
-    def __eq__(self, v):
-        if (self.identificador.__eq__(v.get_id())):
-            return True
-        else:
-            return False
-
-    #Metodo que nos devuelve una representacion en cadena de un vertice
+    # Método que nos devuelve una representacion en cadena de un vértice al imprimir
     def __str__(self):
         return self.identificador
