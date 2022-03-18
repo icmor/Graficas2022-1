@@ -1,39 +1,23 @@
-#Clase que modela una arista
-class arista:
+class Arista:
 
-    #Metodo constructor de la clase arista
-    def __init__(self, extremo1, extremo2):
-        self.extremo1 = extremo1
-        self.extremo2 = extremo2
+    # Método constructor de la clase arista
+    def __init__(self, ex1, ex2):
+        self.ex1 = ex1
+        self.ex2 = ex2
 
-    #Metodo que devuelve el primer extremo
-    def get_ex1(self):
-        return self.extremo1
+    # Método que verifica si dos aristas son iguales (se llama asi: a1 == a2)
+    def __eq__(self, other):
+        return self.ex1 == other.ex1 and self.ex2 == other.ex2 \
+            or self.ex1 == other.ex2 and self.ex2 == other.ex1
 
-    #Metodo que devuelve el segundo extremo
-    def get_ex2(self):
-        return self.extremo2
+    # Método que verifica si v es un extremo de la arista (se llama asi: v in a)
+    def __contains__(self, v):
+        return v == self.ex1 or v == self.ex2
 
-    #Metodo que verifica si dos aristas son iguales
-    def __eq__(self, a1):
-        if (self.extremo1.__eq__(a1.get_ex1()) and self.extremo2.__eq__(a1.get_ex2())):
-            return True
-        elif (self.extremo1.__eq__(a1.get_ex2()) and self.extremo2.__eq__(a1.get_ex1())):
-            return True
-        else:
-            return False
+    #  Método que devuelve una representacion en cadena de arista al evaluar
+    def __repr__(self):
+        return f"Arista({self.ex1}, {self.ex2})"
 
-    #Metodo que devuelve una representacion en cadena de una arista
+    #  Método que devuelve una representacion en cadena de arista al imprimir
     def __str__(self):
-        return str(self.extremo1) + str(self.extremo2)
-
-
-
-
-
-
-
-
-
-
-
+        return str(self.ex1) + str(self.ex2)
