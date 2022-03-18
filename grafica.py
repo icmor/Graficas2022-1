@@ -1,55 +1,51 @@
-#Clase que modela una grafica
-class grafica:
+# Clase que modela una gráfica
+class Grafica:
 
-    #Metodo constructor de la clase
+    # Método constructor de la clase
     def __init__(self, vertices, aristas):
-        self.vertices = vertices
-        self.aristas = aristas
-        for v in self.vertices:
+        self.vertices = vertices.copy()
+        self.aristas = aristas.copy()
+        for a in self.aristas:
+            a.ex1.vecinos.append(a.ex2)
+            a.ex2.vecinos.append(a.ex1)
+
+    # Método que elimina vértices de la gráfica
+    def vdel(self, *args):
+        for v in args:
+            self.vertices.remove(v)
+            for aux in self.vertices:
+                if v in aux.vecinos:
+                    aux.vecinos.remove(v)
+            eliminadas = []
             for a in self.aristas:
-                if(a.get_ex1().__eq__(v)):
-                    v.vecinos.append(a.get_ex2())
-                elif(a.get_ex2().__eq__(v)):
-                    v.vecinos.append(a.get_ex1())
+                if v in a:
+                    eliminadas.append(a)
+            for a in eliminadas:
+                self.aristas.remove(a)
 
-    #Metodo que nos devuelve una representacion en cadena de una grafica
+    # Método que elimina una arista
+    def adel(self, *args):
+        for a in args:
+            self.aristas.remove(a)
+            for v in self.vertices:
+                if v == a.ex1:
+                    v.vecinos.remove(a.ex2)
+                elif v == a.ex2:
+                    v.vecinos.remove(a.ex1)
+
+    # Método que nos devuelve una representación en cadena de gráfica al evaluar
+    def __repr__(self):
+        v = "[" + ", ".join(str(v) for v in self.vertices) + "]"
+        a = "[" + ", ".join(str(a) for a in self.aristas) + "]"
+        return f"Grafica({v}, {a})"
+
+    # Método que nos devuelve una representacion en cadena de gráfica al imprimir
     def __str__(self):
-        #representar en cadena el conjunto de vertices      
-        vert = "{"
-        for v in self.vertices:
-            vert = vert + ", " + v.__str__()
-        vert = vert + "}"   
-        
-        #representar en cadena el conjunto de vertices
-        arist = "{"
-        for a in self.aristas:
-            arist = arist + ", " + a.__str__()
-        arist = arist + "}"
-        
-        return "El conjunto de vertices es: " + vert + "\n" + "El conjunto de aristas es: " + arist
-    
-    #Metodo que elimina un vertice de la grafica
-    def elimina_v(self, v):
-        self.vertices.remove(v)
-        for aux in self.vetices:
-            if (v in aux.vecinos):
-                aux.vecinos.remove(v)
-        eliminadas = []
-        for a in self.aristas:
-            if(a.get_ex1().__eq__(v) or a.get_ex2().__eq__(v)):
-                eliminidas.append(a)
-        for a2 in eliminadas:
-            self.aristas.remove(a2)
+        # representar en cadena el conjunto de vértices
+        v = "{" + ", ".join(str(v) for v in self.vertices) + "}"
 
-    #Metodo que elimina una arista
-    def elimina_a(self, a):
-        self.aristas.remove(a)
-        for v in self.vertices:
-            if(v__eq__(a.get_ex1())):
-                v.vecinos.remove(a.get_ex2())
-            elif(v__eq__(a.get_ex2())):
-                v.vecinos.remove(a.get_ex1())
+        # representar en cadena el conjunto de aristas
+        a = "{" + ", ".join(str(a) for a in self.aristas) + "}"
 
-
-
+        return f"El conjunto de vértices es: {v}\nEl conjunto de aristas es: {a}"
 
