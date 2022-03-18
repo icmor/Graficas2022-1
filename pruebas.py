@@ -1,30 +1,44 @@
-from vertice import vertice
-from arista import arista
-from grafica import grafica
+from vertice import Vertice
+from arista import Arista
+from grafica import Grafica
 
-#Main del programa
-if __name__ == '__main__':
+def main():
+    # vértices
+    v1 = Vertice("v1")
+    v2 = Vertice("v2")
+    v3 = Vertice("v3")
+    v4 = Vertice("v4")
 
-    #vertices
-    v1 = vertice("v1")
-    v2 = vertice("v2")
-    v3 = vertice("v3")
-    v4 = vertice("v4")
+    # aristas
+    a1 = Arista(v1, v2)
+    a2 = Arista(v2, v3)
+    a3 = Arista(v3, v4)
+    a4 = Arista(v4, v1)
 
-    #aristas
-    a1 = arista(v1, v2)
-    a2 = arista(v2, v3)
-    a3 = arista(v3, v4)
-    a4 = arista(v4, v1)
-
-    #conjuntos de vertices
+    # conjuntos de vértices
     vertices = [v1, v2, v3, v4]
 
-    #conjunto de aristas
+    # conjunto de aristas
     aristas = [a1, a2, a3, a4]
 
-    #Grafica
-    g = grafica(vertices, aristas)
+    # Gráfica
+    g = Grafica(vertices, aristas)
 
-    #imprimimos
-    print(str(g))
+    assert g.vertices == vertices
+    assert g.aristas == aristas
+
+    g.adel(a1)
+    aristas.remove(a1)
+
+    assert g.vertices == vertices
+    assert g.aristas == aristas
+
+    g.vdel(v3)
+    vertices.remove(v3)
+    aristas.remove(a2)
+    aristas.remove(a3)
+
+    assert g.vertices == vertices
+    assert g.aristas == aristas
+if __name__ == '__main__':
+    main()
