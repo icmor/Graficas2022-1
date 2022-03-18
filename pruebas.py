@@ -1,6 +1,7 @@
 from vertice import Vertice
 from arista import Arista
 from grafica import Grafica
+import algoritmos
 
 def main():
     # vértices
@@ -40,5 +41,24 @@ def main():
 
     assert g.vertices == vertices
     assert g.aristas == aristas
+
+    # graficables
+    sg1 = [3, 3, 3, 3]
+    sg2 = [0, 0, 0, 0, 0, 0, 0]
+    sg3 = [3, 3, 2, 2]
+
+    # no graficables
+    sn1 = [5, 4, 3, 3, 2]
+    sn2 = [7, 4, 4, 6, 5]
+    sn3 = [3, 2, 4, 5, 6]
+
+    assert algoritmos.havel_hakimi(sg1)
+    assert algoritmos.havel_hakimi(sg2)
+    assert algoritmos.havel_hakimi(sg3)
+
+    assert not algoritmos.havel_hakimi(sn1)
+    assert not algoritmos.havel_hakimi(sn2)
+    assert not algoritmos.havel_hakimi(sn3)
+
 if __name__ == '__main__':
     main()
