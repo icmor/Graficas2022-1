@@ -9,6 +9,17 @@ class Grafica:
             a.ex1.vecinos.append(a.ex2)
             a.ex2.vecinos.append(a.ex1)
 
+    @property
+    def orden(self):
+        return len(self.vertices)
+
+    @property
+    def tamaño(self):
+        return len(self.aristas)
+
+    n = orden
+    m = tamaño
+
     # Método que elimina vértices de la gráfica
     def vdel(self, *args):
         for v in args:
