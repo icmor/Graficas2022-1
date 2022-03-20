@@ -16,12 +16,9 @@ class Grafica:
             for aux in self.vertices:
                 if v in aux.vecinos:
                     aux.vecinos.remove(v)
-            eliminadas = []
-            for a in self.aristas:
+            for a in self.aristas.copy():
                 if v in a:
-                    eliminadas.append(a)
-            for a in eliminadas:
-                self.aristas.remove(a)
+                    self.aristas.remove(a)
 
     # Método que elimina una arista
     def adel(self, *args):
